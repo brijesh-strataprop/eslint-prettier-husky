@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import {
   Keyboard,
-  findNodeHandle,
   View,
-  Image,
   ScrollView,
-  Text,
   Platform,
-  TouchableOpacity,
+  TextInput,
+  Button,
 } from 'react-native';
 import { connect } from 'react-redux';
 import * as userActions from '../../actions/user-actions-types';
@@ -44,18 +42,20 @@ const Login = (props) => {
 
           <TextInput
             value={username}
-            placeholder={emailAddress}
+            placeholder={"Email address"}
             returnKeyType="next"
             keyboardType="email-address"
             onChangeText={name => setUsername(name)}
+            style={{ marginTop: 40 }}
           />
           <TextInput
             value={password}
-            placeholder={passwordText}
+            placeholder={"Password here"}
             returnKeyType="done"
             secureTextEntry
             maxLength={16}
             onChangeText={pass => setPassword(pass)}
+            style={{ marginVertical: 25 }}
           />
           <Button
             onPress={onSubmit}

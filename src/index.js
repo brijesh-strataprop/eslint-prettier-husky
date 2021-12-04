@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Text, SafeAreaView } from "react-native";
+import { View } from "react-native";
+import 'react-native-gesture-handler';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/es/integration/react';
 import configureStore from './config/configure-store';
@@ -15,15 +16,13 @@ const src = () => {
   }, [])
 
   return (
-
-    <Provider store={store}>
-      <PersistGate loading={<Loader />} persistor={persistor}>
-        <SafeAreaView>
+    <View style={{ flex: 1 }}>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
           <Navigator />
-        </SafeAreaView>
-      </PersistGate>
-    </Provider>
-
+        </PersistGate>
+      </Provider>
+    </View>
   )
 }
 

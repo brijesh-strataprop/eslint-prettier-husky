@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = {
   buttonStyle: {
-    backgroundColor: "blue",
+    backgroundColor: 'Blue',
     marginTop: 5,
     width: 80,
   },

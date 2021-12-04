@@ -1,67 +1,34 @@
-import { CommonActions } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createReduxContainer, createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
-import { connect } from 'react-redux';
 import React from 'react';
-import { BackHandler } from 'react-native';
-import { shape, string, number, func } from 'prop-types';
-import routes from './routes';
+import {
+  Login
+} from '../containers/auth';
+import Home from '../containers/home'
+import { createNavigationContainerRef } from '@react-navigation/native';
 
-const stackNavigatorConfiguration = {
-  headerMode: 'none',
-  mode: 'card',
-  navigationOptions: { gesturesEnabled: false },
-};
+export const navigationRef = createNavigationContainerRef()
 
-// Note: createReactNavigationReduxMiddleware must be run before createReduxContainer
-
-export const routerMiddleware = createReactNavigationReduxMiddleware((state) => state.nav);
-
-export const AppNavigator = createStackNavigator(routes, stackNavigatorConfiguration);
-
-const App = createReduxContainer(AppNavigator, 'root');
-
-class navigator extends React.Component {
-  static propTypes = {
-    dispatch: func.isRequired,
-    nav: shape({
-      index: number,
-      key: string.isRequired,
-    }).isRequired,
-  };
-
-  componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
-  }
-
-  componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
-  }
-
-  onBackPress = () => {
-    const {
-      nav, dispatch,
-    } = this.props;
-
-    if (nav.index === 0) {
-      BackHandler.exitApp();
-
-      return true;
-    }
-    dispatch(CommonActions.goBack());
-
-    return true;
-  };
-
-  render() {
-    const {
-      nav, dispatch,
-    } = this.props;
-
-    return <App state={nav} dispatch={dispatch} />;
+export function navigate(name, params) {
+  if (navigationRef.isReady()) {
+    navigationRef.navigate(name, params);
   }
 }
 
-const mapStateToProps = ({ nav }) => ({ nav });
+const Stack = createStackNavigator();
 
-export default connect(mapStateToProps)(navigator);
+class navigator extends React.Component {
+
+  render() {
+    return (
+      <NavigationContainer ref={navigationRef}>
+        <Stack.Navigator>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Home" component={Home} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
+}
+
+export default navigator;

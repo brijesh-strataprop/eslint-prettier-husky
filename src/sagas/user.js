@@ -1,16 +1,14 @@
-import { all, call, select, put, takeLatest } from 'redux-saga/effects';
+import { all, takeLatest } from 'redux-saga/effects';
 import {
   LOGIN,
-  loginFailure,
-  loginRequested,
-  loginSuccess,
 } from '../actions/user-actions-types';
+import { navigate } from '../config/navigator';
 
 
 export function* login({ payload: data }) {
   console.log("user logged in")
+  navigate('Home')
 }
-
 
 function* User() {
   yield all([
