@@ -10,6 +10,7 @@ import {
 import { connect } from 'react-redux';
 import * as userActions from '../../actions/user-actions-types';
 import { AuthStyles } from '../../styles';
+import { SPTextInput } from "../../components/SPTextInput";
 
 const Login = (props) => {
   const [username, setUsername] = useState("");
@@ -31,31 +32,43 @@ const Login = (props) => {
     console.log('requestObject', requestObject)
   };
 
+  const {
+    container,
+    content,
+    scrollViewStyle,
+    emailContainerStyle,
+    passwordContainerStyle
+  } = AuthStyles;
+
   return (
-    <View style={AuthStyles.container}>
-      <View style={AuthStyles.content}>
+    <View style={container}>
+      <View style={content}>
         <ScrollView
+          style={scrollViewStyle}>
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
           keyboardDismissMode={Platform.OS === 'ios' ? 'on-drag' : 'none'}
-          keyboardShouldPersistTaps="always">
-
-          <TextInput
+          keyboardShouldPersistTaps="always"
+          <SPTextInput
+            containerStyle={emailContainerStyle}
+            title={"Email"}
+            placeholder={"Username"}
             value={username}
             placeholder={"Email address"}
             returnKeyType="next"
             keyboardType="email-address"
             onChangeText={name => setUsername(name)}
-            style={{ marginTop: 40 }}
           />
-          <TextInput
+          <SPTextInput
+            containerStyle={passwordContainerStyle}
+            title={"Password"}
+            placeholder={"Password"}
+            secureTextEntry={true}
             value={password}
             placeholder={"Password here"}
             returnKeyType="done"
-            secureTextEntry
             maxLength={16}
             onChangeText={pass => setPassword(pass)}
-            style={{ marginVertical: 25 }}
           />
           <Button
             onPress={onSubmit}
