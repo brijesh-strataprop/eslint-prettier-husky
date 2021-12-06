@@ -4,7 +4,6 @@ import {
   View,
   ScrollView,
   Platform,
-  TextInput,
   Button,
 } from 'react-native';
 import { connect } from 'react-redux';
