@@ -1,22 +1,16 @@
-import React, { useState } from 'react';
-import {
-  Keyboard,
-  View,
-  ScrollView,
-  Platform,
-  Button,
-} from 'react-native';
-import { connect } from 'react-redux';
+import React, {useState} from 'react';
+import {Keyboard, View, ScrollView, Platform, Button} from 'react-native';
+import {connect} from 'react-redux';
 import * as userActions from '../../actions/user-actions-types';
-import { AuthStyles } from '../../styles';
-import { SPTextInput } from "../../components/SPTextInput";
+import {AuthStyles} from '../../styles';
+import {SPTextInput} from '../../components/SPTextInput';
 
-const Login = (props) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const { login } = props;
+const Login = props => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const {login} = props;
 
-  onSubmit = () => {
+  const onSubmit = () => {
     Keyboard.dismiss();
 
     const requestObject = {
@@ -28,7 +22,7 @@ const Login = (props) => {
     login({
       data: requestObject,
     });
-    console.log('requestObject', requestObject)
+    console.log('requestObject', requestObject);
   };
 
   const {
@@ -36,35 +30,33 @@ const Login = (props) => {
     content,
     scrollViewStyle,
     emailContainerStyle,
-    passwordContainerStyle
+    passwordContainerStyle,
   } = AuthStyles;
 
   return (
     <View style={container}>
       <View style={content}>
         <ScrollView
-          style={scrollViewStyle}>
+          style={scrollViewStyle}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
           keyboardDismissMode={Platform.OS === 'ios' ? 'on-drag' : 'none'}
-          keyboardShouldPersistTaps="always"
+          keyboardShouldPersistTaps="always">
           <SPTextInput
             containerStyle={emailContainerStyle}
-            title={"Email"}
-            placeholder={"Username"}
+            title={'Email'}
             value={username}
-            placeholder={"Email address"}
+            placeholder={'Email address'}
             returnKeyType="next"
             keyboardType="email-address"
             onChangeText={name => setUsername(name)}
           />
           <SPTextInput
             containerStyle={passwordContainerStyle}
-            title={"Password"}
-            placeholder={"Password"}
+            title={'Password'}
             secureTextEntry={true}
             value={password}
-            placeholder={"Password here"}
+            placeholder={'Password here'}
             returnKeyType="done"
             maxLength={16}
             onChangeText={pass => setPassword(pass)}
@@ -72,16 +64,14 @@ const Login = (props) => {
           <Button
             onPress={onSubmit}
             style={AuthStyles.buttonStyle}
-            title={"Login"}
+            title={'Login'}
           />
         </ScrollView>
       </View>
     </View>
   );
-}
+};
 
-export default connect(null,
-  {
-    login: userActions.login,
-  }
-)(Login);
+export default connect(null, {
+  login: userActions.login,
+})(Login);
