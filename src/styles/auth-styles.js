@@ -14,7 +14,17 @@ const styles = {
     alignItems: 'center',
     flex: 1,
   },
-
+  scrollViewStyle: {
+    width: "100%",
+  },
+  emailContainerStyle: {
+    marginTop: 40,
+    marginHorizontal: 16,
+  },
+  passwordContainerStyle: {
+    marginVertical: 25,
+    marginHorizontal: 16,
+  },
 };
 
 export default StyleSheet.create(styles);
