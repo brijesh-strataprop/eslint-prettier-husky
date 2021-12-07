@@ -1,6 +1,6 @@
 package com.strata;
 
-import android.os.bundle;
+import android.os.Bundle;
 
 import com.facebook.react.ReactActivity;
 
