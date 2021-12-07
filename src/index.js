@@ -1,16 +1,16 @@
 import React from 'react';
-import {View} from 'react-native';
+import { View } from 'react-native';
 import 'react-native-gesture-handler';
-import {Provider} from 'react-redux';
-import {PersistGate} from 'redux-persist/es/integration/react';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/es/integration/react';
 import SplashScreen from 'react-native-splash-screen';
 import codePush from 'react-native-code-push';
-import configureStore from './config/configure-store';
-import Navigator from './config/navigator';
+import configureStore from '~/config/configure-store';
+import Navigator from '~/config/navigator';
 
-const codePushOptions = {checkFrequency: codePush.CheckFrequency.MANUAL};
+const codePushOptions = { checkFrequency: codePush.CheckFrequency.MANUAL };
 
-const {store, persistor} = configureStore();
+const { store, persistor } = configureStore();
 
 const Src = () => {
   const handleCodePush = () => {
@@ -38,7 +38,7 @@ const Src = () => {
   }, []);
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <Navigator />
